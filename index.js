@@ -9,7 +9,9 @@ const kafka = require("kafka-node");
 
 const client = new kafka.KafkaClient({ kafkaHost: "localhost:9092" });
 
-var consumer = new kafka.Consumer(client, [{ topic: "realTest" }]);
+var consumer = new kafka.Consumer(client, [
+  { topic: "A", offset: 0, partition: 1 },
+]);
 
 var msg;
 var msgList = [];
@@ -17,7 +19,7 @@ var msgList = [];
 consumer.on("message", function (message) {
   msg = JSON.parse(message.value);
   msgList.push(msg);
-  console.log(msgList);
+  console.log(msg);
 });
 
 // Settings
