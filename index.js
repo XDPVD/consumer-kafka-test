@@ -10,7 +10,7 @@ const kafka = require("kafka-node");
 const client = new kafka.KafkaClient({ kafkaHost: "localhost:9092" });
 
 var consumer = new kafka.Consumer(client, [
-  { topic: "A", offset: 0, partition: 1 },
+  { topic: "aduni", offset: 0, partition: 1 },
 ]);
 
 var msg;
