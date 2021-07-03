@@ -3,24 +3,10 @@ const express = require("express");
 const routerMensajes = require("./routes/mensajes");
 // Initializations
 const app = express();
+require('dotenv').config();
 require("./database");
+require("./kafka");
 
-const kafka = require("kafka-node");
-
-const client = new kafka.KafkaClient({ kafkaHost: "localhost:9092" });
-
-var consumer = new kafka.Consumer(client, [
-  { topic: "aduni", offset: 0, partition: 1 },
-]);
-
-var msg;
-var msgList = [];
-
-consumer.on("message", function (message) {
-  msg = JSON.parse(message.value);
-  msgList.push(msg);
-  console.log(msg);
-});
 
 // Settings
 app.set("view engine", "ejs");
@@ -35,9 +21,6 @@ app.use(routerMensajes);
 
 app.use(express.static("public"));
 
-const getMsg = () => {
-  return msgList;
-};
 
 // Global Variables
 
@@ -49,5 +32,3 @@ const getMsg = () => {
 app.listen(app.get("port"), () => {
   console.log("Server on port ", app.get("port"));
 });
-
-exports.getMsg = getMsg;
