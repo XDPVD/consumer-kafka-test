@@ -1,26 +1,52 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-const Message = require('../models/Message');
+const Message = require("../models/Message");
 
-router.get('/mensajes', async (req,res)=>{
-    const messages = await Message.find();
-    console.log(messages);
-    res.render('mensajes');
+var testData = [
+  {
+    firstName: "Jhon",
+    lastName: "Salcedo",
+    dni: "70706938",
+    telephone: "924738128",
+    email: "jhon.salcedo@unmsm.edu.pe",
+    reason: "Motivo",
+    comments: "Lorem ipsum dolor sit, amet consectetur adipisicing elit.",
+  },
+  {
+    firstName: "Jhoan",
+    lastName: "Caramantín",
+    dni: "70706938",
+    telephone: "924738128",
+    email: "jhoan.caramantin@unmsm.edu.pe",
+    reason: "Motivo",
+    comments:
+      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque, numquam.",
+  },
+];
+
+router.get("/mensajesTest", (req, res) => {
+  res.render("mensajesTest", { data: testData });
 });
 
-router.post('/crearMensaje', async (req,res) => {
-    const newMessage = new Message(req.body);
-    await newMessage.save();
-    res.status(200).send('ok');    
+router.get("/mensajes", async (req, res) => {
+  const messages = await Message.find();
+  console.log(messages);
+  res.render("mensajes");
+});
+
+router.post("/crearMensaje", async (req, res) => {
+  const newMessage = new Message(req.body);
+  await newMessage.save();
+  res.status(200).send("ok");
 });
 let obj = {
-    firstName: {type: String, required: true},
-    lastName: {type:String, required: true},
-    dni: {type: Number},
-    telephone: {type: Number},
-    email: {type: String},
-    content: {type: String},
-    date: {type: Date, default: Date.now}
-}
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
+  dni: { type: Number },
+  telephone: { type: Number },
+  email: { type: String },
+  content: { type: String },
+  date: { type: Date, default: Date.now },
+};
 module.exports = router;
