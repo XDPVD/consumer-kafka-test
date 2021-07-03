@@ -3,30 +3,33 @@ const router = express.Router();
 
 const Message = require("../models/Message");
 
-var testData = [
-  {
-    firstName: "Jhon",
-    lastName: "Salcedo",
-    dni: "70706938",
-    telephone: "924738128",
-    email: "jhon.salcedo@unmsm.edu.pe",
-    reason: "Motivo",
-    comments: "Lorem ipsum dolor sit, amet consectetur adipisicing elit.",
-  },
-  {
-    firstName: "Jhoan",
-    lastName: "Caramantín",
-    dni: "70706938",
-    telephone: "924738128",
-    email: "jhoan.caramantin@unmsm.edu.pe",
-    reason: "Motivo",
-    comments:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque, numquam.",
-  },
-];
+const data = require("../index");
+
+// var testData = [
+//   {
+//     firstName: "Jhon",
+//     lastName: "Salcedo",
+//     dni: "70706938",
+//     telephone: "924738128",
+//     email: "jhon.salcedo@unmsm.edu.pe",
+//     reason: "Motivo",
+//     comments: "Lorem ipsum dolor sit, amet consectetur adipisicing elit.",
+//   },
+//   {
+//     firstName: "Jhoan",
+//     lastName: "Caramantín",
+//     dni: "70706938",
+//     telephone: "924738128",
+//     email: "jhoan.caramantin@unmsm.edu.pe",
+//     reason: "Motivo",
+//     comments:
+//       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque, numquam.",
+//   },
+// ];
 
 router.get("/mensajesTest", (req, res) => {
-  res.render("mensajesTest", { data: testData });
+  console.log(data.getMsg());
+  res.render("mensajesTest", { data: data.getMsg() });
 });
 
 router.get("/mensajes", async (req, res) => {
