@@ -17,5 +17,6 @@ consumer.on("message", function (message) {
     obj.telephone = Number(obj.telephone)
 
     const newMessage = new Message(obj);
+    console.log(obj);
     newMessage.save().then((res)=>console.log(res));
 });
